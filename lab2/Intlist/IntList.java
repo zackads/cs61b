@@ -81,8 +81,17 @@ public class IntList {
      */
 
     public static IntList dcatenate(IntList A, IntList B) {
-        //TODO:  fill in method
-        return null;
+        A.last().rest = B;
+
+        return A;
+    }
+
+    public IntList last() {
+        if (this.rest == null) {
+            return this;
+        } else {
+            return this.rest.last();
+        }
     }
 
     /**
@@ -90,10 +99,42 @@ public class IntList {
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
-        //TODO:  fill in method
-        return null;
+        IntList copy = new IntList(A.first, null);
+
+        IntList copyPtr = copy;
+        IntList APtr = A.rest;
+        while (APtr != null) {
+            copyPtr.rest = new IntList(APtr.first, null);
+
+            APtr = APtr.rest;
+            copyPtr = copyPtr.rest;
+        }
+
+        IntList BPtr = B;
+        while (BPtr != null) {
+            copyPtr.rest = new IntList(BPtr.first, null);
+
+            BPtr = BPtr.rest;
+            copyPtr = copyPtr.rest;
+        }
+
+        return copy;
     }
 
+//    public static IntList squareListIterative(IntList L) {
+//        if (L == null) {
+//            return null;
+//        }
+//        IntList res = new IntList(L.first * L.first, null);
+//        IntList ptr = res;
+//        L = L.rest;
+//        while (L != null) {
+//            ptr.rest = new IntList(L.first * L.first, null);
+//            L = L.rest;
+//            ptr = ptr.rest;
+//        }
+//        return res;
+//    }
 
 
 
